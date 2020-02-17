@@ -14,6 +14,7 @@
     setupOpenIcon.addEventListener('keydown', window.modal.setupOpenKeydownHandler);
     setupPlayer.addEventListener('click', window.customize.wizardChangeHandler);
     usernameInput.addEventListener('invalid', window.validate.invalidFormHandler);
+    setupWizardForm.addEventListener('submit', window.customize.uploadHandler);
   }
 
   initSetup();

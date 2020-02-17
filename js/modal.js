@@ -57,6 +57,7 @@
 
   window.modal = {
     setupOpenClickHandler: setupOpenClickHandler,
-    setupOpenKeydownHandler: setupOpenKeydownHandler
+    setupOpenKeydownHandler: setupOpenKeydownHandler,
+    closePopup: closePopup
   };
 })();

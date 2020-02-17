@@ -42,7 +42,16 @@
     }
   }
 
+  function uploadHandler(evt) {
+    window.backend.save(new FormData(setupWizardForm), function () {
+      window.modal.closePopup();
+    });
+
+    evt.preventDefault();
+  }
+
   window.customize = {
-    wizardChangeHandler: wizardChangeHandler
+    wizardChangeHandler: wizardChangeHandler,
+    uploadHandler: uploadHandler
   };
 })();
