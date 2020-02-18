@@ -42,7 +42,22 @@
     }
   }
 
+  function errorSaveHandler(errorMessage) {
+    var errorMessageElement = document.createElement('div');
+    errorMessageElement.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red; position: absolute; left: 0; right: 0; font-size: 30px;';
+    errorMessageElement.textContent = errorMessage;
+
+    document.body.insertAdjacentElement('afterbegin', errorMessageElement);
+  }
+
+
+  function uploadHandler(evt) {
+    window.backend.save(new FormData(setupWizardForm), window.modal.closePopup, errorSaveHandler);
+    evt.preventDefault();
+  }
+
   window.customize = {
-    wizardChangeHandler: wizardChangeHandler
+    wizardChangeHandler: wizardChangeHandler,
+    uploadHandler: uploadHandler
   };
 })();
