@@ -32,9 +32,16 @@
     return randomArr;
   }
 
+  function removeElementsFromParrent(parrentElement) {
+    while (parrentElement.firstChild) {
+      parrentElement.removeChild(parrentElement.firstChild);
+    }
+  }
+
   window.util = {
     getRandomInt: getRandomInt,
     getRandomArrayItem: getRandomArrayItem,
-    getRandomArray: getRandomArray
+    getRandomArray: getRandomArray,
+    removeElementsFromParrent: removeElementsFromParrent
   };
 })();

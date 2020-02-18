@@ -2,13 +2,10 @@
 
 (function () {
   var WIZARDS_NUMBER = 4;
-  // var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
-  // var lastnames = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
-  // var coatColors = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
-  // var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
   var similarWizardsList = document.querySelector('.setup-similar-list');
   var template = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
-
+  var errorMessageStyle = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red; position: absolute; left: 0; right: 0; font-size: 30px;';
+  var pageBody = document.querySelector('body');
 
   function renderWizard(wizard) {
     var wizardElement = template.cloneNode(true);
@@ -35,10 +32,10 @@
 
   function errorLoadHandler(errorMessage) {
     var errorMessageElement = document.createElement('div');
-    errorMessageElement.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red; position: absolute; left: 0; right: 0; font-size: 30px;';
+    errorMessageElement.style = errorMessageStyle;
     errorMessageElement.textContent = errorMessage;
-
-    document.body.insertAdjacentElement('afterbegin', errorMessageElement);
+    pageBody.insertAdjacentElement('afterbegin', errorMessageElement);
+    errorMessageElement.classList.add('error-message');
   }
 
   window.backend.load(succesLoadHandler, errorLoadHandler);
