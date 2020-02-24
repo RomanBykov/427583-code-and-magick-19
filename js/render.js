@@ -4,8 +4,6 @@
   var WIZARDS_NUMBER = 4;
   var similarWizardsList = document.querySelector('.setup-similar-list');
   var template = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
-  var errorMessageStyle = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red; position: absolute; left: 0; right: 0; font-size: 30px;';
-  var pageBody = document.querySelector('body');
 
   function renderWizard(wizard) {
     var wizardElement = template.cloneNode(true);
@@ -15,28 +13,16 @@
     return wizardElement;
   }
 
-  function appendWizardsToPage(wizardsArr) {
+  window.render = function (wizardsArr) {
     var listFragment = document.createDocumentFragment();
-    var shuffledWizards = window.util.getRandomArray(wizardsArr);
+    var wizardsLength = wizardsArr.length >= WIZARDS_NUMBER ? WIZARDS_NUMBER : wizardsArr.length;
+    similarWizardsList.innerHTML = '';
 
-    for (var i = 0; i < WIZARDS_NUMBER; i++) {
-      listFragment.appendChild(renderWizard(shuffledWizards[i]));
+    for (var i = 0; i < wizardsLength; i++) {
+      listFragment.appendChild(renderWizard(wizardsArr[i]));
     }
 
     similarWizardsList.appendChild(listFragment);
-  }
+  };
 
-  function succesLoadHandler(wizardsArr) {
-    appendWizardsToPage(wizardsArr);
-  }
-
-  function errorLoadHandler(errorMessage) {
-    var errorMessageElement = document.createElement('div');
-    errorMessageElement.style = errorMessageStyle;
-    errorMessageElement.textContent = errorMessage;
-    pageBody.insertAdjacentElement('afterbegin', errorMessageElement);
-    errorMessageElement.classList.add('error-message');
-  }
-
-  window.backend.load(succesLoadHandler, errorLoadHandler);
 })();
