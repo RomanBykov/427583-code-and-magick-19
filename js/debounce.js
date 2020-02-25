@@ -2,14 +2,21 @@
 
 (function () {
   var DEBOUNCE_INTERVAL = 300;
-  var lastTimeout;
 
   window.debounce = function (cb) {
-    if (lastTimeout) {
-      window.clearTimeout(lastTimeout);
-    }
+    var lastTimeout = null;
 
-    lastTimeout = window.setTimeout(cb, DEBOUNCE_INTERVAL);
+    return function () {
+      var parameters = arguments;
+
+      if (lastTimeout) {
+        window.clearTimeout(lastTimeout);
+      }
+
+      lastTimeout = window.setTimeout(function () {
+        cb.apply(null, parameters);
+      }, DEBOUNCE_INTERVAL);
+    };
   };
 
 })();
